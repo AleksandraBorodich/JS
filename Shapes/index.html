@@ -1,0 +1,58 @@
+<!doctype html>
+<script src="15_game.js"></script>
+<script src="game_levels.js"></script>
+<script src="16_canvas.js"></script>
+
+<canvas width="600" height="200"></canvas>
+<script>
+    //triangle
+    var cx = document.querySelector("canvas").getContext("2d");
+    cx.beginPath();
+    cx.moveTo(20, 20);
+    cx.lineTo(70, 20);
+    cx.lineTo(90, 70);
+    cx.lineTo(0, 70);
+    cx.closePath();
+    cx.stroke();
+
+    // rhombus
+    cx.beginPath();
+    cx.translate(170, 50);
+    cx.rotate(Math.PI / 4);
+    cx.fillStyle = "red";
+    cx.fillRect(-20, -20, 60, 60);
+    cx.resetTransform();
+
+    //zigzag
+    cx.beginPath();
+    cx.moveTo(250, 20);
+    for (var i = 0; i < 6; i++) {
+        cx.lineTo(330, 20 + i * 14 + 8);
+        cx.lineTo(250, 20 + i * 14 + 12);
+    }
+	cx.stroke();
+
+    //spiral
+    //var radius = 50;
+   cx.beginPath();
+    cx.moveTo(390, 60);
+    for (var i = 0; i < 200; i++) {
+        var angle = i * Math.PI / 30;
+        var dist = 50 * i / 200;
+        cx.lineTo(390 + Math.cos(angle) * dist,
+            60 + Math.sin(angle) * dist);
+    }
+  cx.stroke();
+
+    //star
+cx.beginPath();
+    cx.moveTo(550, 60);
+    for (var i = 1; i <= 8; i++) {
+        var angle = i * Math.PI / 4;
+        cx.quadraticCurveTo(500, 60,
+            500 + Math.cos(angle) * 50,
+            60 + Math.sin(angle) * 50);
+    }
+    cx.fillStyle = "yellow";
+    cx.fill();
+</script>

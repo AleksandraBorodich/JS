@@ -1,0 +1,39 @@
+<canvas width="400" height="400"></canvas>
+<script>
+    var cx = document.querySelector("canvas").getContext("2d");
+
+    var lastTime = null;
+    var x = 10,
+        y = 30;
+    var radius = 10;
+    var speedX = 100,
+        speedY = 100;
+
+    function frame(time) {
+        if (lastTime != null)
+            updateAnimation(Math.min(100, time - lastTime) / 1000);
+        lastTime = time;
+        requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+
+    function updateAnimation(step) {
+
+
+        cx.clearRect(0, 0, 400, 400); //The clearRect() method clears the specified pixels within a given rectangle.
+        cx.strokeRect(0, 0, 400, 400);
+	cx.strokeStyle = "#FF0000";
+
+        x += step * speedX;
+        y += step * speedY;
+        if (x < 0 + radius || x > 400 - radius)
+            speedX = -speedX;
+        if (y < 0 + radius || y > 400 - radius)
+            speedY = -speedY;
+        cx.fillStyle = "#FF0000";
+        cx.beginPath();
+        cx.arc(x, y, radius, 0, Math.PI * 2);
+        cx.fill();
+    }
+</script>

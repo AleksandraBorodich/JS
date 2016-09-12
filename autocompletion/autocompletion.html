@@ -1,0 +1,34 @@
+<!doctype html>
+
+<script src="code/promise.js"></script>
+<input type="text" id="field">
+<div id="suggestions" style="cursor: pointer"></div>
+
+<script>
+    // Builds up an array with global variable names, like
+    // 'alert', 'document', and 'scrollTo'
+    var terms = [];
+    for (var name in window)
+        terms.push(name);
+
+    var test = document.querySelector("#field");
+    var suggestions = document.querySelector("#suggestions");
+
+    test.addEventListener("input", function() {
+   suggestions.textContent = "";
+
+        var matching = terms.filter(function(term) {
+            return term.indexOf(test.value) == 0;
+        });
+     
+        matching.forEach(function(term) {
+            var node = document.createElement("div");
+            node.textContent = term;
+            node.addEventListener("click", function() {
+                test.value = term;
+                suggestions.textContent = "";
+            });
+            suggestions.appendChild(node);
+        });
+    });
+</script>

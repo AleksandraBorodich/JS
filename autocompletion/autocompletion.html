@@ -15,20 +15,23 @@
     var suggestions = document.querySelector("#suggestions");
 
     test.addEventListener("input", function() {
-   suggestions.textContent = "";
+        suggestions.textContent = "";
 
-        var matching = terms.filter(function(term) {
-            return term.indexOf(test.value) == 0;
-        });
-     
-        matching.forEach(function(term) {
-            var node = document.createElement("div");
-            node.textContent = term;
-            node.addEventListener("click", function() {
-                test.value = term;
-                suggestions.textContent = "";
+        if (test.value != "") {
+
+            var matching = terms.filter(function(term) {
+                return term.indexOf(test.value) == 0;
             });
-            suggestions.appendChild(node);
-        });
+
+            matching.forEach(function(term) {
+                var node = document.createElement("div");
+                node.textContent = term;
+                node.addEventListener("click", function() {
+                    test.value = term;
+                    suggestions.textContent = "";
+                });
+                suggestions.appendChild(node);
+            });
+        }
     });
 </script>
